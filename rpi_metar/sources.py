@@ -223,7 +223,13 @@ class NZLINK(METARSource):
     # This URL is the page you actually want to pull down with requests.
     METBRIEF = 'http://www.linknetwork.co.nz/FlightPlan?employeeId=MTQxNg%3D%3D-kX8FP2rHakU%3D&fbclid=IwAR3lgqR4kgdYp0oiwD6LuxBeaKGY1QaDhBdUitnfuzeWQesSNdiCJo61NTk'
 
+#    # If any airport code outside of this list is used the website will throw an error (eg. MET Locations: the following locations do not issue the requested MET report types: YBBN)
+#    ACCEPTED_CODES = {'NZCH', 'NZCI', 'NZAA', 'NZDN', 'NZGS', 'NZHN', 'NZHK', 'NZNV', 'NZKK', 'NZMS', 'NZMF', 'NZNR',
+#                      'NZNS', 'NZNP', 'NZOU', 'NZOH', 'NZPM', 'NZPP', 'NZQN', 'NZRO', 'NZAP', 'NZTG', 'NZMO', 'NZTU',
+#                      'NZWF', 'NZWN', 'NZWS', 'NZWK', 'NZWU', 'NZWR', 'NZWP', 'NZWB'}
 
+#    def __init__(self, airport_codes, *, **kwargs):
+#        self.airport_codes = ' '.join([code for code in airport_codes if code in IFIS.ACCEPTED_CODES])
 
     def get_metar_info(self):
         with requests.Session() as session:
