@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 
 
 class FlightCategory(Enum):
-    VFR = cfg.get('settings', 'VFR', fallback=GREEN)
+    VFR = GREEN
     IFR = YELLOW
     MVFR = BLUE
     LIFR = RED
