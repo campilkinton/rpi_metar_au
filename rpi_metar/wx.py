@@ -13,7 +13,7 @@ class FlightCategory(Enum):
     IFR = YELLOW
     MVFR = BLUE
     LIFR = RED
-    UNKNOWN = BLACK
+    UNKNOWN = YELLOW
     OFF = BLACK
     MISSING = MAGENTA
     THUNDERSTORM = MAGENTA
