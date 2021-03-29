@@ -276,7 +276,7 @@ def load_configuration():
         'IFR': colors.YELLOW,
         'LIFR': colors.RED,
         'MVFR': colors.BLUE,
-        'UNKNOWN': colors.BLACK,
+        'UNKNOWN': colors.YELLOW,
         'OFF': colors.BLACK,
         'MISSING': colors.MAGENTA,
         'THUNDERSTORM': colors.MAGENTA,
