@@ -10,6 +10,7 @@ YELLOW = Color(245, 245, 0)
 BLACK = Color(0, 0, 0)
 WHITE = Color(255, 255, 255)
 ORANGE = Color(150, 255, 0)
+CYAN = Color(250, 0, 220)
 
 # For gamma correction
 # https://learn.adafruit.com/led-tricks-gamma-correction/the-issue

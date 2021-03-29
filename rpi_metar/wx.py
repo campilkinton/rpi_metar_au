@@ -3,7 +3,7 @@ import logging
 import re
 from enum import Enum
 from fractions import Fraction
-from rpi_metar.leds import GREEN, RED, BLUE, MAGENTA, YELLOW, BLACK, ORANGE, WHITE
+from rpi_metar.leds import GREEN, RED, BLUE, MAGENTA, YELLOW, BLACK, ORANGE, WHITE, CYAN
 
 log = logging.getLogger(__name__)
 
@@ -18,7 +18,7 @@ class FlightCategory(Enum):
     MISSING = MAGENTA
     THUNDERSTORM = MAGENTA
     WINDY = ORANGE
-
+    ALTERNATE = CYAN
 
 def get_conditions(metar_info):
     """Returns the visibility, ceiling, wind speed, and gusts for a given airport from some metar info."""
