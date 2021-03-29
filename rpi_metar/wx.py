@@ -16,6 +16,8 @@ class FlightCategory(Enum):
     UNKNOWN = BLACK
     OFF = BLACK
     MISSING = MAGENTA
+    THUNDERSTORM = MAGENTA
+    WINDY = ORANGE
 
 
 def get_conditions(metar_info):
