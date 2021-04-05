@@ -18,7 +18,7 @@ from rpi_metar import wx
 from rpi_metar import leds as colors
 from queue import Queue
 
-
+#
 log = logging.getLogger(__name__)
 
 
