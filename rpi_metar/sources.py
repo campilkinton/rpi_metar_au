@@ -207,7 +207,7 @@ class BOMbackup(METARSource):
         # chrome_options.headless = True # also works
 
         # Where the Chrome Webdriver is stored
-        driver = webdriver.Chrome(executable_path="C:\\ChromeDriver\\chromedriver.exe", options=chrome_options)
+        driver = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver", options=chrome_options)
 
         # Add airport codes to clipboard
         pyperclip.copy(airport_codes)
