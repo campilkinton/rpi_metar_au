@@ -205,7 +205,7 @@ class BOMbackup(METARSource):
         chrome_options.add_argument("--no-sandbox") # linux only
         # chrome_options.add_argument("--headless")
         # chrome_options.headless = True # also works
-        chrome_options.addArguments("–disable-dev-shm-usage");
+        chrome_options.add_argument("–disable-dev-shm-usage");
         chrome_options.setExperimentalOption('useAutomationExtension', false);
 
         # Where the Chrome Webdriver is stored
