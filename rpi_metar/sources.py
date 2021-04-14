@@ -206,7 +206,7 @@ class BOMbackup(METARSource):
         # chrome_options.add_argument("--headless")
         # chrome_options.headless = True # also works
         chrome_options.add_argument("–disable-dev-shm-usage");
-        chrome_options.add_experimental_option('useAutomationExtension', false);
+        chrome_options.add_experimental_option('useAutomationExtension', False);
 
         # Where the Chrome Webdriver is stored
         driver = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver", options=chrome_options)
