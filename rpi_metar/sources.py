@@ -183,28 +183,6 @@ class BOM(METARSource):
         return metars
 
 
-class AMM(METARSource):
-    """Queries the BOM website service."""
-
-    URL = 'https://australianmetarmaps.com.au/METARs.txt'
-
-    def __init__(self, airport_codes, **kwargs):
-        self.airport_codes = ','.join(airport_codes)
-
-    def get_metar_info(self):
-
-        r = requests.get(self.URL)
-
-        matches = re.finditer(r'(?P<METAR>(?P<CODE>\w{4}).*?)(?:\')', r.text)
-
-        metars = {}
-        for match in matches:
-            info = match.groupdict()
-            metars[info['CODE'].upper()] = {'raw_text': info['METAR']}
-
-        return metars
-
-
 # class BOMbackup(METARSource):
 #     """Queries the BOM website service."""
 #
