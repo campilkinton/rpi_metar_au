@@ -4,7 +4,7 @@ import re
 import requests
 import time
 import pyperclip
-
+import datetime
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -154,37 +154,38 @@ class SkyVector(METARSource):
 
         return metars
 
-
-class BOM(METARSource):
-    """Queries the BOM website service."""
-
-    URL = 'http://www.bom.gov.au/aviation/php/process.php'
-
-    def __init__(self, airport_codes, **kwargs):
-        self.airport_codes = ','.join(airport_codes)
-
-    def get_metar_info(self):
-
-        payload = {
-            'keyword': self.airport_codes,
-            'type': 'search',
-            'page': 'TAF',
-        }
-
-        r = requests.post(self.URL, data=payload)
-
-        matches = re.finditer(r'(?:METAR |SPECI )(?P<METAR>(?P<CODE>\w{4}).*?)(?:</p>|<h3>)', r.text)
-
-        metars = {}
-        for match in matches:
-            info = match.groupdict()
-            metars[info['CODE'].upper()] = {'raw_text': info['METAR']}
-
-        return metars
+# BOM has restricted webscraping. This source no longer works
+#
+# class BOM(METARSource):
+#     """Queries the BOM website service."""
+#
+#     URL = 'http://www.bom.gov.au/aviation/php/process.php'
+#
+#     def __init__(self, airport_codes, **kwargs):
+#         self.airport_codes = ','.join(airport_codes)
+#
+#     def get_metar_info(self):
+#
+#         payload = {
+#             'keyword': self.airport_codes,
+#             'type': 'search',
+#             'page': 'TAF',
+#         }
+#
+#         r = requests.post(self.URL, data=payload)
+#
+#         matches = re.finditer(r'(?:METAR |SPECI )(?P<METAR>(?P<CODE>\w{4}).*?)(?:</p>|<h3>)', r.text)
+#
+#         metars = {}
+#         for match in matches:
+#             info = match.groupdict()
+#             metars[info['CODE'].upper()] = {'raw_text': info['METAR']}
+#
+#         return metars
 
 
 class AMM(METARSource):
-    """Queries the BOM website service."""
+    """Queries Australian METAR Maps website."""
 
     URL = 'https://australianmetarmaps.com.au/METARs.txt'
 
@@ -195,14 +196,26 @@ class AMM(METARSource):
 
         r = requests.get(self.URL)
 
+        Upload_Time = str(re.findall(r'(?P<timeZ>^.{0,22})', r.text))
+        nowZ = datetime.datetime.utcnow()
+        before_30Z = nowZ - datetime.timedelta(minutes=30)
+        METAR_time_converted = datetime.datetime.strptime(Upload_Time, "['%d/%m/%Y - %H:%M:%SZ']")
+
         matches = re.finditer(r'(?P<METAR>(?P<CODE>\w{4}).*?)(?:\')', r.text)
 
-        metars = {}
-        for match in matches:
-            info = match.groupdict()
-            metars[info['CODE'].upper()] = {'raw_text': info['METAR']}
+        if METAR_time_converted < before_30Z:
+            return None
+        else:
+            print('in range')
 
-        return metars
+            matches = re.finditer(r'(?P<METAR>(?P<CODE>\w{4}).*?)(?:\')', r.text)
+
+            metars = {}
+            for match in matches:
+                info = match.groupdict()
+                metars[info['CODE'].upper()] = {'raw_text': info['METAR']}
+
+            return metars
 
 
 # class BOMbackup(METARSource):
