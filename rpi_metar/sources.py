@@ -206,8 +206,6 @@ class AMM(METARSource):
         if METAR_time_converted < before_30Z:
             return None
         else:
-            print('in range')
-
             matches = re.finditer(r'(?P<METAR>(?P<CODE>\w{4}).*?)(?:\')', r.text)
 
             metars = {}
