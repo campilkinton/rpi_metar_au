@@ -409,7 +409,7 @@ def main():
     set_all(leds, wx.FlightCategory.UNKNOWN.value)
 
     for airport in AIRPORTS.values():
-        leds.setPixelColor(airport.index, wx.FlightCategory.UNKNOWN.value)
+        leds.setPixelColor(airport.index, wx.FlightCategory.BOOTUP.value)
     set_legend(leds, cfg)
     leds.show()
 
