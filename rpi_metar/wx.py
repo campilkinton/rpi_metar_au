@@ -15,7 +15,7 @@ class FlightCategory(Enum):
     LIFR = RED
     UNKNOWN = BLACK
     OFF = BLACK
-    MISSING = MAGENTA
+    MISSING = BLACK
     THUNDERSTORM = MAGENTA
     WINDY = ORANGE
     BOOTUP = CYAN
