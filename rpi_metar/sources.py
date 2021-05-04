@@ -3,12 +3,8 @@ import logging
 import re
 import requests
 import time
-import pyperclip
 import datetime
 
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.options import Options
 from pkg_resources import resource_filename
 from retrying import retry
 from xmltodict import parse as parsexml
@@ -214,65 +210,6 @@ class AMM(METARSource):
                 metars[info['CODE'].upper()] = {'raw_text': info['METAR']}
 
             return metars
-
-
-# class BOMbackup(METARSource):
-#     """Queries the BOM website service."""
-#
-#     # BOM METAR Page URL
-#     BOMURL = "http://www.bom.gov.au/aviation/forecasts/taf/"
-#     ACCEPTBUTTON = '//*[@id="accept"]'
-#     TEXTFIELD = '//*[@id="keyword"]'
-#     SUBMITBUTTON = '//*[@id="submit"]'
-#
-#
-#     def __init__(self, airport_codes, **kwargs):
-#         self.airport_codes = ','.join(airport_codes)
-#
-#     def get_metar_info(self):
-#
-#         # Options for Chrome
-#         chrome_options = Options()
-#         chrome_options.add_argument("--disable-extensions")
-#         chrome_options.add_argument("--disable-gpu")
-#         chrome_options.add_argument("--no-sandbox") # linux only
-#         # chrome_options.add_argument("--headless")
-#         # chrome_options.headless = True # also works
-#         chrome_options.add_argument("–disable-dev-shm-usage");
-#         chrome_options.add_experimental_option('useAutomationExtension', False);
-#
-#         # Where the Chrome Webdriver is stored
-#         driver = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver", options=chrome_options)
-#
-#         # Add airport codes to clipboard
-#         pyperclip.copy(airport_codes)
-#
-#         # Launch Chrome and go to BOM
-#         driver.get(BOMURL)
-#
-#         # Clicks the accept terms button
-#         driver.find_element_by_xpath(ACCEPTBUTTON).click()
-#
-#         # Finds text box and enters airport codes
-#         driver.find_element_by_xpath(TEXTFIELD).send_keys(Keys.CONTROL, 'v')
-#         driver.find_element_by_xpath(SUBMITBUTTON).click()
-#
-#         # Waits 10 seconds for page to load
-#         time.sleep(10)
-#
-#         # Find METARs
-#         matches = re.finditer(r'(?:METAR |SPECI )(?P<METAR>(?P<CODE>\w{4}).*?)(?:</p>|<h3>)', driver.page_source)
-#
-#         # Closes browser
-#         driver.close()
-#
-#         metars = {}
-#         for match in matches:
-#             info = match.groupdict()
-#             metars[info['CODE'].upper()] = {'raw_text': info['METAR']}
-#
-#         return metars
-
 
 
 class IFIS(METARSource):
