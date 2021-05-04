@@ -83,9 +83,9 @@ class Airport(object):
             log.exception('{} has no data.'.format(self.code))
             self.category = wx.FlightCategory.UNKNOWN
             return
-
+#
         # Thunderstorms
-        self.thunderstorms = any(word in metar['raw_text'] for word in ['TSRA', 'VCTS', 'THUNDERSTORMS', 'TSGR', 'TSRASN', 'DL-N', 'DL-NE', 'DL-E', 'DL-SE', 'DL-S', 'DL-SW', 'DL-W', 'DL-NW', 'HEAVY', ' TS', 'DL-', 'LIGHTNING', 'DL-N/DL-NW', 'DL-S/DL-SW', 'DL-N/DL-NE', 'DL-S/DL-SE', 'RETS']) and self.category != wx.FlightCategory.OFF
+        self.thunderstorms = any(word in metar['raw_text'] for word in ['TSRA', 'VCTS', 'THUNDERSTORMS', 'TSGR', 'TSRASN', 'DL-N', 'DL-NE', 'DL-E', 'DL-SE', 'DL-S', 'DL-SW', 'DL-W', 'DL-NW', 'HEAVY', ' TS ', 'DL-', 'LIGHTNING', 'DL-N/DL-NW', 'DL-S/DL-SW', 'DL-N/DL-NE', 'DL-S/DL-SE', 'RETS']) and self.category != wx.FlightCategory.OFF
 
         # Wind info
         try:
