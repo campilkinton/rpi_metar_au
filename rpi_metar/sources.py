@@ -225,7 +225,10 @@ class Avplan(METARSource):
 
         r = requests.get(self.URL, headers={'Authorization': 'Bearer ' + self.AuthToken})
 
-        matches = re.finditer(r'(?:METAR |SPECI )(?P<METAR>(?P<CODE>\w{4}).*?)(?:")', r.text)
+        # Remove \/ from METARs
+        goodtext = str(r.text).replace('\/', '/')
+
+        matches = re.finditer(r'(?:METAR |SPECI )(?P<METAR>(?P<CODE>\w{4}).*?)(?:")', goodtext)
 
         metars = {}
         for match in matches:
