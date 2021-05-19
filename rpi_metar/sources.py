@@ -212,6 +212,29 @@ class AMM(METARSource):
             return metars
 
 
+class Avplan(METARSource):
+    """Queries Australian METAR Maps website."""
+
+    URL = 'https://api-preprod.avplan-efb.com/api/v4/opmet/metar'
+    AuthToken = '7KDDlultS24J5NlI5qUrJQ=='
+
+    def __init__(self, airport_codes, **kwargs):
+        self.airport_codes = ','.join(airport_codes)
+
+    def get_metar_info(self):
+
+        r = requests.get(self.URL, headers={'Authorization': 'Bearer ' + self.AuthToken})
+
+        matches = re.finditer(r'(?:METAR |SPECI )(?P<METAR>(?P<CODE>\w{4}).*?)(?:")', r.text)
+
+        metars = {}
+        for match in matches:
+            info = match.groupdict()
+            metars[info['CODE'].upper()] = {'raw_text': info['METAR']}
+
+        return metars
+
+
 class IFIS(METARSource):
     URL = 'https://www.ifis.airways.co.nz/script/briefing/met_briefing_proc.asp'
     LOGIN_URL = 'https://www.ifis.airways.co.nz/secure/script/user_reg/login_proc.asp'
