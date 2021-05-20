@@ -213,7 +213,7 @@ class AMM(METARSource):
 
 
 class Avplan(METARSource):
-    """Queries Australian METAR Maps website."""
+    """Queries AvPlans website."""
 
     URL = 'https://api-preprod.avplan-efb.com/api/v4/opmet/metar'
     AuthToken = '7KDDlultS24J5NlI5qUrJQ=='
