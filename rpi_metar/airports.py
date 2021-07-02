@@ -76,7 +76,7 @@ class Airport(object):
         self.reset()
 
         try:
-            metar = metars[self.code[:4]]
+            metar = metars[self.code[:3]]
             log.debug(metar)
             self.raw = metar['raw_text']
         except KeyError:
