@@ -228,7 +228,7 @@ class Avplan(METARSource):
         # Remove \/ from METARs
         goodtext = str(r.text).replace('\/', '/')
 
-        matches = re.finditer(r'(?:METAR |SPECI )(?P<METAR>(?P<CODE>\w{4}).*?)(?:")', goodtext)
+        matches = re.finditer(r'(?:METAR |SPECI )(?P<METAR>(?P<CODE>\w{3,4}).*?)(?:")', goodtext)
 
         metars = {}
         for match in matches:
