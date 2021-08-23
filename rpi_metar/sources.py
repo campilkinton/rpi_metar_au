@@ -245,7 +245,7 @@ class IFIS(METARSource):
     # If any airport code outside of this list is used the website will throw an error (eg. MET Locations: the following locations do not issue the requested MET report types: YBBN)
     ACCEPTED_CODES = {'NZCH', 'NZNS', 'NZWF', 'NZNP', 'NZWN', 'NZOU', 'NZWS', 'NZOH', 'NZWK', 'NZPM', 'NZWU', 'NZGS', 'NZPP',
                       'NZWR', 'NZHN', 'NZQN', 'NZWP', 'NZHK', 'NZRO', 'NZWB', 'NZNV', 'NZAP', 'NZKK', 'NZTG', 'NZMS', 'NZMO',
-                      'NZMF', 'NZTU', 'NZNR', 'NZKT', 'NZWO', 'NZKI', 'NZAS', 'NZUK', 'NZLX', 'NZAA', 'NZDN'
+                      'NZMF', 'NZTU', 'NZNR', 'NZKT', 'NZWO', 'NZKI', 'NZAS', 'NZUK', 'NZLX', 'NZAA', 'NZDN', 'NZCI'
                       }
 
     def __init__(self, airport_codes, *, config, **kwargs):
