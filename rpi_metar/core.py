@@ -17,6 +17,8 @@ from rpi_metar.airports import Airport, LED_QUEUE, MAX_WIND_SPEED_KTS, Legend
 from rpi_metar import wx
 from rpi_metar import leds as colors
 from queue import Queue
+import board
+import adafruit_tsl2591
 
 #
 log = logging.getLogger(__name__)
@@ -362,6 +364,32 @@ def set_legend(leds, cfg):
         if index is not None:
             leds.setPixelColor(index, category.value)
             log.info('Legend: set %s to %s.', index, category.name)
+
+
+# def set_light_sensor():
+#     # Create sensor object, communicating over the board's default I2C bus
+#     i2c = board.I2C()  # uses board.SCL and board.SDA
+#
+#     # Initialize the sensor.
+#     sensor = adafruit_tsl2591.TSL2591(i2c)
+#
+#     # You can optionally change the gain and integration time:
+#     # sensor.gain = adafruit_tsl2591.GAIN_LOW (1x gain)
+#     # sensor.gain = adafruit_tsl2591.GAIN_MED (25x gain, the default)
+#     # sensor.gain = adafruit_tsl2591.GAIN_HIGH (428x gain)
+#     # sensor.gain = adafruit_tsl2591.GAIN_MAX (9876x gain)
+#     # sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_100MS (100ms, default)
+#     # sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_200MS (200ms)
+#     # sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_300MS (300ms)
+#     # sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_400MS (400ms)
+#     # sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_500MS (500ms)
+#     # sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_600MS (600ms)
+#
+#     # Read the total lux, IR, and visible light levels and print it every second.
+#     while True:
+#         # Read and calculate the light level in lux.
+#         lux = sensor.lux
+#         print("Total light: {0}lux".format(lux))
 
 
 def get_num_leds(cfg):
