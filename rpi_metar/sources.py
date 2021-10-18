@@ -233,7 +233,7 @@ class AMMTEST(METARSource):
         if METAR_time_converted < before_30Z:
             return None
         else:
-            matches = re.finditer(r'(?P<METAR>(?P<CODE>\w{4}).*?)(?:\')', r.text)
+            matches = re.finditer(r'(?P<METAR>(?P<CODE>\w{3,4}).*?)(?:\')', r.text)
 
             metars = {}
             for match in matches:
