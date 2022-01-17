@@ -63,7 +63,7 @@ def get_conditions(metar_info):
             ceiling = 10000
         except ZeroDivisionError:
             visibility = 10000
-    if match.group('NCD'):
+    if match.group(' NCD '):
         ceiling = 10000
 
     # Wind info
