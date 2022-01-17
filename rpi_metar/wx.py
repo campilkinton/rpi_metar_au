@@ -57,13 +57,8 @@ def get_conditions(metar_info):
 #    if match:
 #        ceiling = int(match.group('ceiling')) * 100  # It is reported in hundreds of feet
     if match.group('ceiling'):
-        try:
-            ceiling = int(match.group('ceiling')) * 100  # It is reported in hundreds of feet
-        except ValueError:
-            ceiling = 10000
-        except ZeroDivisionError:
-            visibility = 10000
-    if match.group(' NCD '):
+        ceiling = int(match.group('ceiling')) * 100  # It is reported in hundreds of feet
+    if match.group('NCD'):
         ceiling = 10000
 
     # Wind info
