@@ -6,10 +6,10 @@ GREEN = Color(220, 0, 0)
 RED = Color(0, 255, 0)
 BLUE = Color(0, 0, 255)
 MAGENTA = Color(0, 255, 255)
-YELLOW = Color(230, 250, 0)
+YELLOW = Color(245, 245, 0)
 BLACK = Color(0, 0, 0)
 WHITE = Color(255, 255, 255)
-ORANGE = Color(130, 250, 0)
+ORANGE = Color(150, 255, 0)
 CYAN = Color(250, 0, 220)
 
 # For gamma correction
