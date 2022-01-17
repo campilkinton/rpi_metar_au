@@ -34,6 +34,8 @@ def get_conditions(metar_info):
             visibility = float(match.group('visibility')) / 1609
         except ValueError:
             visibility = 10
+        except ZeroDivisionError:
+            visibility = None
     if match.group('CAVOK'):
         visibility = 10
     if match.group('visibilityKM'):
