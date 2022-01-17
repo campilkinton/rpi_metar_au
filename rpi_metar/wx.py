@@ -54,8 +54,15 @@ def get_conditions(metar_info):
             visibility = None
     # Ceiling
     match = re.search(r'(SCT|VV|BKN|OVC)(?P<ceiling>\d{3})|(?P<NCD> NCD )', metar_info)
-    if match:
-        ceiling = int(match.group('ceiling')) * 100  # It is reported in hundreds of feet
+#    if match:
+#        ceiling = int(match.group('ceiling')) * 100  # It is reported in hundreds of feet
+    if match.group('ceiling'):
+        try:
+            ceiling = int(match.group('ceiling')) * 100  # It is reported in hundreds of feet
+        except ValueError:
+            ceiling = 10000
+        except ZeroDivisionError:
+            visibility = 10000
     if match.group('NCD'):
         ceiling = 10000
 
