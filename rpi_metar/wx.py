@@ -52,10 +52,16 @@ def get_conditions(metar_info):
             visibility = float(sum(Fraction(s) for s in visibility.split()))
         except ZeroDivisionError:
             visibility = None
-    # Ceiling
-    match = re.search(r'(SCT|VV|BKN|OVC)(?P<ceiling>\d{3})|(?P<NCD> NCD )', metar_info)
+    # Ceiling Normal
+    match = re.search(r'(SCT|VV|BKN|OVC)(?P<ceiling>\d{3})', metar_info)
     if match:
         ceiling = int(match.group('ceiling')) * 100  # It is reported in hundreds of feet
+
+    #Ceiling NCD
+    match = re.search(r'(?P<NCD> NCD )', metar_info)
+    if match:
+        ceiling = 10000  # It is reported in hundreds of feet
+
     # Wind info
     match = re.search(r'\b\d{3}(?P<speed>\d{2,3})G?(?P<gust>\d{2,3})?KT', metar_info)
     if match:
