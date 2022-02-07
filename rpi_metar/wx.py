@@ -36,6 +36,8 @@ def get_conditions(metar_info):
             visibility = 10
         except ZeroDivisionError:
             visibility = None
+        except AttributeError:
+            visibility = None
     if match.group('CAVOK'):
         visibility = 10
     if match.group('visibilityKM'):
@@ -73,8 +75,8 @@ def get_conditions(metar_info):
 def get_flight_category(visibility, ceiling):
     """Converts weather conditions into a category."""
     log.debug('Finding category for %s, %s', visibility, ceiling)
-    if visibility is None and ceiling is None:
-        return FlightCategory.UNKNOWN
+#    if visibility is None and ceiling is None:
+#        return FlightCategory.UNKNOWN
 
     # Unlimited ceiling
     if visibility and ceiling is None:
