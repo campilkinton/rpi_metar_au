@@ -253,7 +253,7 @@ class Avplan(METARSource):
 
     def get_metar_info(self):
 
-        r = requests.get(self.URL, headers={'Authorization': 'Bearer ' + self.AuthToken})
+        r = requests.get(self.URL, headers={'Authorization': 'Bearer ' + self.AuthToken}, verify=False)
 
         # Remove \/ from METARs
         goodtext = str(r.text).replace('\/', '/')
