@@ -41,3 +41,37 @@ def set_upgrade_schedule():
     if changes_made:
         cron.write()
         log.info('Updated crontab.')
+
+# def reboot_schedule():
+#
+#     cron = CronTab(user='root')
+#
+#     time_reboot = 60
+#
+#
+#
+#     # Search for daily and reboot checks, removing anything else
+#     for job in cron.find_command(cmd):
+#         freq = job.frequency()
+#         if freq == 365:
+#             daily_found = True
+#         elif freq == 525600:
+#             reboot_found = True
+#         else:
+#             cron.remove(job)
+#             changes_made = True
+#
+#     if not daily_found:
+#         job = cron.new(command=cmd)
+#         job.every(1).days()
+#         changes_made = True
+#         log.info('Adding daily update to cron.')
+#     if not reboot_found:
+#         job = cron.new(command=cmd)
+#         job.every_reboot()
+#         changes_made = True
+#         log.info('Adding reboot update to cron.')
+#
+#     if changes_made:
+#         cron.write()
+#         log.info('Updated crontab.')

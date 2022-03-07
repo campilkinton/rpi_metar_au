@@ -211,6 +211,36 @@ class AMM(METARSource):
 
             return metars
 
+class AMMTEST(METARSource):
+    """Queries Australian METAR Maps website."""
+
+    URL = 'https://australianmetarmaps.com.au/TESTMETARs.txt'
+
+    def __init__(self, airport_codes, **kwargs):
+        self.airport_codes = ','.join(airport_codes)
+
+    def get_metar_info(self):
+
+        r = requests.get(self.URL)
+
+        Upload_Time = str(re.findall(r'(?P<timeZ>^.{0,22})', r.text))
+        nowZ = datetime.datetime.utcnow()
+        before_30Z = nowZ - datetime.timedelta(minutes=1000000000)
+        METAR_time_converted = datetime.datetime.strptime(Upload_Time, "['%d/%m/%Y - %H:%M:%SZ']")
+
+        matches = re.finditer(r'(?P<METAR>(?P<CODE>\w{3,4}).*?)(?:\')', r.text)
+
+        if METAR_time_converted < before_30Z:
+            return None
+        else:
+            matches = re.finditer(r'(?P<METAR>(?P<CODE>\w{3,4}).*?)(?:\')', r.text)
+
+            metars = {}
+            for match in matches:
+                info = match.groupdict()
+                metars[info['CODE'].upper()] = {'raw_text': info['METAR']}
+
+            return metars
 
 class Avplan(METARSource):
     """Queries AvPlans website."""
@@ -223,7 +253,7 @@ class Avplan(METARSource):
 
     def get_metar_info(self):
 
-        r = requests.get(self.URL, headers={'Authorization': 'Bearer ' + self.AuthToken})
+        r = requests.get(self.URL, headers={'Authorization': 'Bearer ' + self.AuthToken}, verify=False)
 
         # Remove \/ from METARs
         goodtext = str(r.text).replace('\/', '/')

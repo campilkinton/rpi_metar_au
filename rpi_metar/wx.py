@@ -34,6 +34,10 @@ def get_conditions(metar_info):
             visibility = float(match.group('visibility')) / 1609
         except ValueError:
             visibility = 10
+        except ZeroDivisionError:
+            visibility = None
+        except AttributeError:
+            visibility = None
     if match.group('CAVOK'):
         visibility = 10
     if match.group('visibilityKM'):
@@ -50,10 +54,16 @@ def get_conditions(metar_info):
             visibility = float(sum(Fraction(s) for s in visibility.split()))
         except ZeroDivisionError:
             visibility = None
-    # Ceiling
+    # Ceiling Normal
     match = re.search(r'(SCT|VV|BKN|OVC)(?P<ceiling>\d{3})', metar_info)
     if match:
         ceiling = int(match.group('ceiling')) * 100  # It is reported in hundreds of feet
+
+    #Ceiling NCD
+    match = re.search(r'(?P<NCD> NCD )', metar_info)
+    if match:
+        ceiling = 10000  # It is reported in hundreds of feet
+
     # Wind info
     match = re.search(r'\b\d{3}(?P<speed>\d{2,3})G?(?P<gust>\d{2,3})?KT', metar_info)
     if match:
@@ -65,8 +75,8 @@ def get_conditions(metar_info):
 def get_flight_category(visibility, ceiling):
     """Converts weather conditions into a category."""
     log.debug('Finding category for %s, %s', visibility, ceiling)
-    if visibility is None and ceiling is None:
-        return FlightCategory.UNKNOWN
+#    if visibility is None and ceiling is None:
+#        return FlightCategory.UNKNOWN
 
     # Unlimited ceiling
     if visibility and ceiling is None:
