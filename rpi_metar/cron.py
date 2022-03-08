@@ -9,11 +9,11 @@ def set_upgrade_schedule():
     """Makes sure the code tries to update itself periodically."""
     cron = CronTab(user='root')
 
-    cmd = '/opt/rpi_metar_au/bin/updatedev.sh'
+    cmd = '/opt/rpi_metar_au/bin/update.sh'
     changes_made = False
 
     # The code should check daily, and at every reboot
-    daily_found = False
+    # daily_found = False
     reboot_found = False
 
     # Search for daily and reboot checks, removing anything else
@@ -27,11 +27,11 @@ def set_upgrade_schedule():
             cron.remove(job)
             changes_made = True
 
-    if not daily_found:
-        job = cron.new(command=cmd)
-        job.every(1).days()
-        changes_made = True
-        log.info('Adding daily update to cron.')
+    # if not daily_found:
+    #     job = cron.new(command=cmd)
+    #     job.every(1).days()
+    #     changes_made = True
+    #     log.info('Adding daily update to cron.')
     if not reboot_found:
         job = cron.new(command=cmd)
         job.every_reboot()
