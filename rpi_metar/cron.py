@@ -9,7 +9,7 @@ def set_upgrade_schedule():
     """Makes sure the code tries to update itself periodically."""
     cron = CronTab(user='root')
 
-    cmd = '/opt/rpi_metar/bin/upgrade.sh'
+    cmd = '/opt/rpi_metar_au/bin/updatedev.sh'
     changes_made = False
 
     # The code should check daily, and at every reboot

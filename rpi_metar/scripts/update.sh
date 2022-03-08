@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 #Script to update rpi_metar_au to newest version on develop branch
