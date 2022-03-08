@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Script to update rpi_metar_au to newest version on develop branch
+#Script to update rpi_metar_au to newest version on Main branch
 
 sleep 60
 sudo systemctl stop rpi_metar_au
