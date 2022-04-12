@@ -6,7 +6,6 @@ from fractions import Fraction
 from rpi_metar.leds import GREEN, RED, BLUE, MAGENTA, YELLOW, BLACK, ORANGE, WHITE, CYAN
 from datetime import datetime, timedelta
 
-#DEVELOP TEST
 log = logging.getLogger(__name__)
 
 

@@ -25,6 +25,7 @@ class Airport(object):
         self._category = wx.FlightCategory.UNKNOWN
         self._unknown_count = 0
         self._unknown_off = unknown_off
+        self.Ztime = None
 
     def __repr__(self):
         return '<{code} @ {index}: {raw} -> {cat}>'.format(
@@ -37,6 +38,7 @@ class Airport(object):
     def reset(self):
         self.visibility = None
         self.ceiling = None
+        self.Ztime = None
         self.raw = None
         self.thunderstorms = False
         self.wind_speed = 0
