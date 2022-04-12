@@ -79,7 +79,7 @@ def get_conditions(metar_info):
         ztime_object = datetime.strptime(ztime, '%d%H%M')
         ztime_object = ztime_object.replace(year=ztime_object.now().year,month=ztime_object.now().month)
         before_60Z = datetime.utcnow() - timedelta(minutes=60)
-        if ztime_object > before_60Z:
+        if ztime_object < before_60Z:
             visibility = ceiling = None
 
 
