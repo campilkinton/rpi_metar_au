@@ -4,7 +4,7 @@ import re
 from enum import Enum
 from fractions import Fraction
 from rpi_metar.leds import GREEN, RED, BLUE, MAGENTA, YELLOW, BLACK, ORANGE, WHITE, CYAN
-# from datetime import datetime, timedelta
+from datetime import datetime, timedelta
 
 log = logging.getLogger(__name__)
 
@@ -25,6 +25,7 @@ def get_conditions(metar_info):
     """Returns the visibility, ceiling, wind speed, and gusts for a given airport from some metar info."""
     log.debug(metar_info)
     visibility = ceiling = None
+    Ztime = datetime.utcnow()
     speed = gust = 0
     # Visibility
 
