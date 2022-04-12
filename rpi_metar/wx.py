@@ -4,6 +4,7 @@ import re
 from enum import Enum
 from fractions import Fraction
 from rpi_metar.leds import GREEN, RED, BLUE, MAGENTA, YELLOW, BLACK, ORANGE, WHITE, CYAN
+# from datetime import datetime, timedelta
 
 log = logging.getLogger(__name__)
 
@@ -69,14 +70,29 @@ def get_conditions(metar_info):
     if match:
         speed = int(match.group('speed'))
         gust = int(match.group('gust')) if match.group('gust') else 0
+
+    # # METAR time
+    # match = re.search(r'(?P<UTC>\d{6})(?:Z)', metar_info)
+    # if match:
+    #     UTCtime = match.group('UTC')
+    #     UTCobject = datetime.strptime(UTCtime, '%d%H%M')
+    #     Ztime = UTCobject.replace(year=UTCobject.now().year,month=UTCobject.now().month)
+
     return (visibility, ceiling, speed, gust)
+    # return (visibility, ceiling, speed, gust, Ztime)
 
-
+# def get_flight_category(visibility, ceiling, Ztime):
 def get_flight_category(visibility, ceiling):
     """Converts weather conditions into a category."""
     log.debug('Finding category for %s, %s', visibility, ceiling)
-#    if visibility is None and ceiling is None:
-#        return FlightCategory.UNKNOWN
+    # if visibility is None and ceiling is None:
+    #     return FlightCategory.UNKNOWN
+
+    # nowZ = datetime.utcnow()
+    # before_60Z = nowZ - timedelta(minutes=60)
+    # if Ztime < before_60Z:
+    #     return FlightCategory.UNKNOWN
+
 
     # Unlimited ceiling
     if visibility and ceiling is None:
