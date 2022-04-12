@@ -25,7 +25,7 @@ def get_conditions(metar_info):
     """Returns the visibility, ceiling, wind speed, and gusts for a given airport from some metar info."""
     log.debug(metar_info)
     visibility = ceiling = None
-    Ztime = datetime.utcnow()
+    ztime = datetime.utcnow()
     speed = gust = 0
     # Visibility
 
@@ -71,6 +71,16 @@ def get_conditions(metar_info):
     if match:
         speed = int(match.group('speed'))
         gust = int(match.group('gust')) if match.group('gust') else 0
+
+    # METAR time
+    match = re.search(r'(?P<UTC>\d{6})(?:Z)', metar_info)
+    if match:
+        ztime = match.group('UTC')
+        ztime_object = datetime.strptime(ztime, '%d%H%M')
+        ztime_object = ztime_object.replace(year=ztime_object.now().year,month=ztime_object.now().month)
+        before_60Z = datetime.utcnow() - timedelta(minutes=60)
+        and ztime_object < before_60Z:
+            ceiling = 20
 
 
     return (visibility, ceiling, speed, gust)
