@@ -80,7 +80,8 @@ def get_conditions(metar_info):
         ztime_object = ztime_object.replace(year=ztime_object.now().year,month=ztime_object.now().month)
         before_60Z = datetime.utcnow() - timedelta(minutes=60)
         if ztime_object < before_60Z:
-            visibility and ceiling = 12345678
+            visibility = 12345678
+            ceiling = 12345678
 
 
     return (visibility, ceiling, speed, gust)
@@ -95,7 +96,7 @@ def get_flight_category(visibility, ceiling, ztime):
 
     # http://www.faraim.org/aim/aim-4-03-14-446.html
     try:
-        if visibility and ceiling <= 12345678:
+        if visibility and ceiling == 12345678:
             return FlightCategory.UNKNOWN
         elif visibility < 1 or ceiling < 500:
             return FlightCategory.LIFR
