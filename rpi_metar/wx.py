@@ -95,7 +95,7 @@ def get_flight_category(visibility, ceiling, ztime):
 
     # http://www.faraim.org/aim/aim-4-03-14-446.html
     try:
-        if visibility and ceiling = 12345678:
+        if visibility and ceiling <= 12345678:
             return FlightCategory.UNKNOWN
         elif visibility < 1 or ceiling < 500:
             return FlightCategory.LIFR
