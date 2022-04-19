@@ -86,7 +86,7 @@ def get_conditions(metar_info):
 
     return (visibility, ceiling, speed, gust)
 
-def get_flight_category(visibility, ceiling, ztime):
+def get_flight_category(visibility, ceiling):
     """Converts weather conditions into a category."""
     log.debug('Finding category for %s, %s', visibility, ceiling)
 
