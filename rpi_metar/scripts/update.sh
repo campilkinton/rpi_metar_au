@@ -1,7 +1,8 @@
 #!/bin/bash
 
-#Script to update rpi_metar_au to newest version on develop branch
+#Script to update rpi_metar_au to newest version on Main branch
 
+sleep 60
 sudo systemctl stop rpi_metar_au
 sudo su <<EOF
 source /opt/rpi_metar_au/bin/activate
@@ -9,32 +10,3 @@ pip install -U git+https://github.com/thommo17/rpi_metar_au.git@Main
 exit
 EOF
 sudo systemctl start rpi_metar_au
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
